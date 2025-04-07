@@ -30,6 +30,16 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    // 모듈 경로
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    // jwt 사용하는 경우 추가 (예제이므로, 다른 라이브러리 사용 가능)
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    implementation 'io.jsonwebtoken:jjwt-jackson:0.11.5' // JSON 처리를 위해 jackson 사용 시
+
+    // swagger -> springdoc OpenAPI 3 UI
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6")
+
 }
 
 tasks.named('test') {
