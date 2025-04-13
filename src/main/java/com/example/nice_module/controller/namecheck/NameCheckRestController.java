@@ -1,6 +1,7 @@
 package com.example.nice_module.controller.namecheck;
 
 import com.example.nice_module.dto.namecheck.NameCheckRequestDto;
+import com.example.nice_module.dto.namecheck.NameCheckRequestJwtDto;
 import com.example.nice_module.util.JwtUtil;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -18,11 +19,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * [테스트 순서]
- * /test/namecheck/NameCheck.java 파일 실행 -> 결과 확인 후 웹 적용
+ * /NameCheck.java 파일 실행 -> 결과 확인 후 웹 적용
  * sRequestNumber(검증, 혹은 사용자 정의 파라미터) -> 사용 방법 정의(redis, session, token 등)
  * */
 @RestController
-public class NameCheckController {
+public class NameCheckRestController {
 
   private String sSiteCode = "Z000"; // 사이트코드
   private String sSitePw = "10753084"; // 사이트 비밀번호
@@ -52,7 +53,7 @@ public class NameCheckController {
   /**
    * 실명 인증 요청을 처리합니다.
    *
-   * @param requestBody JSON 형식의 요청 바디로, 아래의 필드를 포함합니다:
+   * @param
    *   - sJumin (String): 주민등록번호 또는 외국인 등록번호
    *   - sName (String): 성함
    *   - sRequestNumber (String): 사전 발급된 인증 요청 번호 (JWT, session 등에 포함된 값과 비교)
@@ -61,11 +62,11 @@ public class NameCheckController {
    */
 
   @PostMapping("/nameCheckPost")
-  public ResponseEntity<JsonNode> nameCheckPost(@RequestBody JsonNode requestBody, HttpSession session) {
+  public ResponseEntity<JsonNode> nameCheckPost(@RequestBody NameCheckRequestDto dto, HttpSession session) {
     try{
-      String sJumin = requestBody.has("sJumin") ? requestBody.get("sJumin").asText() : "";
-      String sName = requestBody.has("sName") ? requestBody.get("sName").asText() : "";
-      String sRequestNumber = requestBody.has("sRequestNumber") ? requestBody.get("sRequestNumber").asText() : "";
+      String sJumin = dto.getSJumin();
+      String sName = dto.getSName();
+      String sRequestNumber = dto.getSRequestNumber();
       String sessionRequestNumber = session.getAttribute("nameCheckSession").toString();
       RNCheck ncClient = new RNCheck();
 
@@ -165,7 +166,7 @@ public class NameCheckController {
   }
 
   @PostMapping("/nameCheckPost_jwt")
-  public ResponseEntity<JsonNode> nameCheckPostJWT(@RequestBody NameCheckRequestDto dto) {
+  public ResponseEntity<JsonNode> nameCheckPostJWT(@RequestBody NameCheckRequestJwtDto dto) {
     try {
       String sJumin = dto.getSJumin();
       String sName = dto.getSName();

@@ -1,11 +1,20 @@
-# ✅ NICE_ID 실명인증 모듈
+# ✅ NICE_ID 본인인증 모듈
 
-Spring Boot 환경에서 실명 인증 연동을 위한 예제 코드입니다.
-
+Spring Boot 환경에서 본인인증 연동을 위한 예제 코드입니다.
+본인인증 수단은 다음과 같으며, 제공되는 인증 수단은 계약정보에 따라 상이할 수 있습니다.
+(1) 휴대폰 본인인증
+<p align="center"> 
+    <img src="./스크린샷 2025-04-14 오전 7.49.09.png" width="30%" alt="통신사 선택 화면"/> 
+    <img src="./스크린샷 2025-04-14 오전 7.49.09.png" width="30%" alt="인증방법 선택 화면"/> 
+    <img src="./스크린샷 2025-04-14 오전 7.49.09.png" width="30%" alt="SMS 인증 동의화면"/> 
+</p> <p align="center"> <em>① 통신사 선택</em> &nbsp;&nbsp;&nbsp;&nbsp; 
+<em>② 인증 방법 선택 (PASS / QR / SMS)</em> 
+&nbsp;&nbsp;&nbsp;&nbsp; <em>
+③ 이용 동의 후 인증 진행</em> </p>
 ## 📌 1. 실명 인증 프로세스 안내
 
-- `NameCheck.java`: 콘솔 테스트용 Java 클래스
-- `NameCheckRestController.java`: 웹 기반 인증 테스트용 컨트롤러
+- `Total.java`: 콘솔 테스트용 Java 클래스, enc_data 생성 확인용
+- `TotalRestController.java`: 웹 기반 인증 테스트용 컨트롤러
 
 웹 환경에서는 고유 요청 번호인 `sRequestNumber`를 활용하여 세션 기반 검증 또는 JWT 기반 검증을 수행합니다.
 

@@ -1,10 +1,10 @@
-package com.example.nice_module.dto.namecheck;
+package com.example.nice_module.dto.simplenamecheck;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 @Data
-public class NameCheckRequestDto {
+public class SimpleNameCheckRequestDto {
   @Schema(description = "주민등록번호 또는 외국인 등록번호", example = "900101-1234567")
   private String sJumin;
 

@@ -1,4 +1,4 @@
-package com.example.nice_module.test.namecheck;
+package com.example.nice_module.controller.namecheck;
 
 import niceid.namecheck.RNCheck;
 

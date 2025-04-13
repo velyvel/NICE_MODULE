@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>간편실명인증_테스트페이지</title>
+</head>
+<body>
+<form name="form_simp" method="post">
+  <!-- 인증요청 암호화 데이터 -->
+  <input type="text" name="enc_data" th:value="${sEncData}">
+  <!-- 팝업 호출 링크 -->
+  <button type="button" id="btn_submit">NiceID 간편실명확인 서비스 Click</button>
+</form>
+</body>
+<script>
+  document.getElementById('btn_submit').addEventListener('click', function () {
+    window.open("", "popupSimp", "width=500,height=430, toolbar=no, scrollbars=no, resizable=no, status=no, menubar=no, top=0, left=0");
+    document.form_simp.action = "https://cert.namecheck.co.kr/NiceIDS/cert_input.asp";
+    document.form_simp.target = "popupSimp";
+    document.form_simp.submit();
+  })
+</script>
+</html>
