@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
  * */
 @RestController
 public class TotalRestController {
-  private final String siteCode = "T9999";
-  private final String sitePassword = "000000000000";
+  private final String siteCode = "";
+  private final String sitePassword = "";
   private final ObjectMapper mapper = new ObjectMapper();
 
   @GetMapping("/checkPlusMain")
