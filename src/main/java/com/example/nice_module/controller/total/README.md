@@ -4,7 +4,7 @@ Spring Boot 환경에서 본인인증 연동을 위한 예제 코드입니다.
 본인인증 수단은 다음과 같으며, 제공되는 인증 수단은 계약정보에 따라 상이할 수 있습니다.
 (1) 휴대폰 본인인증
 <p align="center"> 
-    <img src="./스크린샷 2025-04-14 오전 7.49.09.png" width="30%" alt="통신사 선택 화면"/> 
+    <img src="./src/main/java/com/example/nice_module/controller/total/image/total01.png" width="30%" alt="통신사 선택 화면"/> 
     <img src="./스크린샷 2025-04-14 오전 7.49.09.png" width="30%" alt="인증방법 선택 화면"/> 
     <img src="./스크린샷 2025-04-14 오전 7.49.09.png" width="30%" alt="SMS 인증 동의화면"/> 
 </p> <p align="center"> <em>① 통신사 선택</em> &nbsp;&nbsp;&nbsp;&nbsp; 
