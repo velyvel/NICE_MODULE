@@ -2,123 +2,35 @@
 
 Spring Boot 환경에서 본인인증 연동을 위한 예제 코드입니다.
 본인인증 수단은 다음과 같으며, 제공되는 인증 수단은 계약정보에 따라 상이할 수 있습니다.
-(1) 휴대폰 본인인증
+
+##  📌 1. 인증 수단 선택
 <p align="center"> 
-    <img src="./src/main/java/com/example/nice_module/controller/total/image/total01.png" width="30%" alt="통신사 선택 화면"/> 
-    <img src="./스크린샷 2025-04-14 오전 7.49.09.png" width="30%" alt="인증방법 선택 화면"/> 
-    <img src="./스크린샷 2025-04-14 오전 7.49.09.png" width="30%" alt="SMS 인증 동의화면"/> 
+    <img src="./image/screen03.png" width="30%" alt="인증 수단 선택"/>
+</p> <p align="center"> 
+<em>
+    ① 인증 수단 선택 : 계약에 따라 초기에 표시되는 화면이 다릅니다.<br>
+    (휴대폰 인증 등 한가지만 선택되었다면, 해당 인증수단 초기 화면으로 바로 전환됩니다.)
+</em> &nbsp;&nbsp;&nbsp;&nbsp; 
+
+##  📌 2. 인증 수단 상세 : 휴대폰 본인인증
+### 📱휴대폰 본인인증
+
+<p align="center"> 
+    <img src="./image/total01.png" width="30%" alt="통신사 선택 화면"/> 
+    <img src="./image/total02.png" width="30%" alt="인증방법 선택 화면"/> 
+    <img src="./image/total18.png" width="30%" alt="SMS 인증 동의화면"/> 
 </p> <p align="center"> <em>① 통신사 선택</em> &nbsp;&nbsp;&nbsp;&nbsp; 
-<em>② 인증 방법 선택 (PASS / QR / SMS)</em> 
-&nbsp;&nbsp;&nbsp;&nbsp; <em>
-③ 이용 동의 후 인증 진행</em> </p>
-## 📌 1. 실명 인증 프로세스 안내
-
-- `Total.java`: 콘솔 테스트용 Java 클래스, enc_data 생성 확인용
-- `TotalRestController.java`: 웹 기반 인증 테스트용 컨트롤러
-
-웹 환경에서는 고유 요청 번호인 `sRequestNumber`를 활용하여 세션 기반 검증 또는 JWT 기반 검증을 수행합니다.
-
-## 📦 2. 필요한 파라미터
-
-| 변수명 | 설명 |
-|--------|------|
-| `siteCode` | 사이트 코드 (NICE 발급) |
-| `sitePassword` | 사이트 비밀번호 (NICE 발급) |
-| `jumin` | 주민등록번호 13자리 (String) |
-| `name` | 성명 |
-
-## 🧾 3. NameCheckRequestDto
-
-토큰 방식(JWT)을 사용하는 경우, 요청 파라미터는 아래와 같습니다:
-
-```json
-{
-  "token": "생성한 jwt 토큰",
-  "sjumin": "주민등록번호 13자리 String",
-  "sname": "성함",
-  "srequestNumber": "고유 요청번호"
-}
-```
-
-`makeRequestNo()` 함수를 활용하거나, 자체 로직으로 `sRequestNumber`를 생성할 수 있습니다.
-
-## 🌐 4. 웹 적용 방식
-
-### ✅ (1) 세션을 사용하는 방법
-
-1. `/nameCheckMain` 실행 → `sRequestNumber` 발급
-2. `/nameCheckPost`로 인증 요청 → 세션에 저장된 `sRequestNumber`와 일치 여부 검증
-
-#### 예시
-
-**요청 1**: `/nameCheckMain`
-```json
-{}
-```
-
-**응답**:
-```json
-{
-  "sRequestNumber": "REQ202*04072216314214819745808"
-}
-```
-
-**요청 2**: `/nameCheckPost`
-```json
-{
-  "sjumin": "9****92*****9",
-  "sname": "강*림",
-  "srequestNumber": "REQ202*04072216314214819745808"
-}
-```
-
-**응답**:
-```json
-{
-  "returnCode": "1",
-  "returnMessage": "인증성공"
-}
-```
-
-### ✅ (2) 토큰(JWT)을 사용하는 방법
-
-1. `/nameCheckMain_jwt` 실행 → `sRequestNumber` 및 `token` 발급
-2. `/nameCheckPost_jwt`로 인증 요청 → 토큰 내 `sRequestNumber`와 비교
-
-#### 예시
-
-**요청 1**: `/nameCheckMain_jwt`
-```json
-{}
-```
-
-**응답**:
-```json
-{
-  "sRequestNumber": "REQ202*04072221147585037430718",
-  "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJuYW1lQ2hlY2siLCJzUmVxdWVzdE51bWJlciI6IlJFUTIwMjUwNDA3MjIyMTE0NzU4NTAzNzQzMDcxOCIsImlhdCI6MTc0NDAzMjA3NCwiZXhwIjoxNzQ0MDMyMzc0fQ.WBi7lgtGj14XjcgnjO7irDFhHX12KLZ3xWwf-9o6g3s"
-}
-```
-
-**요청 2**: `/nameCheckPost_jwt`
-```json
-{
-  "token": "위의 토큰값",
-  "sjumin": "주민등록번호 13자리 String",
-  "sname": "성함",
-  "srequestNumber": "위의 sRequestNumber"
-}
-```
-
-**응답**:
-```json
-{
-  "returnCode": "1",
-  "returnMessage": "인증성공"
-}
-```
-
-## ✅ 기타 참고
+<em>
+    ② 인증 방법 선택 (PASS / QR / SMS) : 웹 기본 3버튼 노출<br>
+    웹의 경우 3버튼이 기본 설정이지만, String customize = "Mobile" 설정을 통해 하기 2버튼 노출 가능<br>
+    특정 버튼(1개) 만 원할 경우 계약담당자에게 문의
+</em> 
+&nbsp;&nbsp;&nbsp;&nbsp; 
+<em>
+    ③ 인증 방법 선택 (PASS / SMS) : 모바일 기본 2버튼 노출<br>
+    특정 버튼(1개) 만 원할 경우 계약담당자에게 문의
+</em> 
+</p>
 
 - `sRequestNumber`는 요청의 정합성을 위한 고유 식별자입니다.
 - 세션을 사용할 수 없는 환경에서는 JWT로 보안을 대체할 수 있습니다.
